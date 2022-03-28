@@ -21,4 +21,10 @@ public class ControladorGUI : MonoBehaviour
         NetworkManager.Singleton.StartHost();
         MenuPrincipal.SetActive(false);
     }
+
+    public void PeticionCambiarPosicion(){
+        NetworkObject objetoRedJugador = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject();
+        Jugador jugadorLocal = objetoRedJugador.GetComponent<Jugador>();
+        jugadorLocal.PosicionAleatoriaServerRpc();
+    }
 }

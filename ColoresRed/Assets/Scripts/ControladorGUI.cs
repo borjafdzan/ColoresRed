@@ -27,4 +27,10 @@ public class ControladorGUI : MonoBehaviour
         Jugador jugadorLocal = objetoRedJugador.GetComponent<Jugador>();
         jugadorLocal.PosicionAleatoriaServerRpc();
     }
+
+    public void PeticionCambiarColor(){
+        NetworkObject objetoRedJugador = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject();
+        Jugador jugadorLocal = objetoRedJugador.GetComponent<Jugador>();
+        jugadorLocal.CambiarColorServerRpc();
+    }
 }

@@ -23,8 +23,13 @@ public class Jugador : NetworkBehaviour
             this.controlador = GameObject.FindGameObjectWithTag("ControladorColores").GetComponent<ControladorColores>();
         }
 
+        //Solo cambiamos el color y la posicion si es es owner esto 
+        //se envia al sevidor y el se encarga de cambiarlo, si no pusieramos
+        //is owner nos daria un error diciendo que no podemos cambiar una NetworkVariable
+        //si no somos owner
         if (IsOwner){
             CambiarColorInicialServerRpc();
+            PosicionAleatoriaServerRpc();
         }
     }
 
@@ -38,11 +43,15 @@ public class Jugador : NetworkBehaviour
         this.transform.position = newValue;
     }
 
+    //Este metodo se llama cada vez que se hace click en el boton de 
+    //cambiarBoton
     [ServerRpc]
     public void CambiarColorServerRpc(){
         Color colorActual = colorJugador.Value;
         colorJugador.Value = controlador.CambiarColorJugador(colorActual);
     }
+    //Este metodo solo se llama en el start, para que el numero de colores en la 
+    //lista se reduzca
     [ServerRpc]
     public void CambiarColorInicialServerRpc(){
         colorJugador.Value = controlador.AsignarColorInicial();

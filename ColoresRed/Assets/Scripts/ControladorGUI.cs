@@ -6,6 +6,7 @@ using UnityEngine;
 public class ControladorGUI : MonoBehaviour
 {
     public GameObject MenuPrincipal;
+    public GameObject PrefabControladorColores;
 
     public void OnClickBtnCliente(){
         NetworkManager.Singleton.StartClient();
@@ -13,11 +14,13 @@ public class ControladorGUI : MonoBehaviour
     }
 
     public void OnClickBtnServidor(){
+        CrearControladorDeColores();
         NetworkManager.Singleton.StartServer();
         MenuPrincipal.SetActive(false);
     }
 
     public void OnClickBtnHost(){
+        CrearControladorDeColores();
         NetworkManager.Singleton.StartHost();
         MenuPrincipal.SetActive(false);
     }
@@ -28,6 +31,11 @@ public class ControladorGUI : MonoBehaviour
         jugadorLocal.AddColorListaServidorServerRpc();
         MenuPrincipal.SetActive(true);
         Invoke("Desconectar", 0.3f);
+    }
+
+    //Crear controlador de colores
+    private void CrearControladorDeColores(){
+        Instantiate(PrefabControladorColores, Vector3.zero, Quaternion.identity);
     }
 
     private void Desconectar(){

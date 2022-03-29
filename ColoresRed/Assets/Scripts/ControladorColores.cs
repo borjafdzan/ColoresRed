@@ -34,4 +34,7 @@ public class ControladorColores : MonoBehaviour
        this.colores.Remove(colorInicial);
        return colorInicial;
    }
+   public void AddColorLista(Color colorJugadorDesconectado){
+       this.colores.Add(colorJugadorDesconectado);
+   }
 }
